@@ -3,6 +3,10 @@ name = "ki18n-rs"
 version = "0.1.0"
 edition = "2018"
 links = "KF5I18n"
+license-file = "LICENSE.txt"
+readme = "README.md"
+repository = "https://github.com/Ayush1325/ki18n-rs"
+keywords = ["ki18n", "kde", "localization"]
 
 [dependencies]
 cpp = "0.5"
