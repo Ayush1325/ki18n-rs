@@ -18,4 +18,3 @@ qttypes = "0.2"
 [build-dependencies]
 cpp_build = "0.5"
 semver = "1.0"
-pkg-config = "0.3"

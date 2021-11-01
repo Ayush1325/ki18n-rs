@@ -2,7 +2,7 @@
 //! KI18n is a cross-platform internationalization framework used by KDE applications. This crate is meant to allow using KI18n with
 //! Rust and [qmetaobject-rs](https://github.com/woboq/qmetaobject-rs) crate.
 //! # Example
-//! ```rust
+//! ```ignore
 //! use cstr::cstr;
 //! use qmetaobject::prelude::*;
 //! use ki18n_rs::KLocalizedContext;
