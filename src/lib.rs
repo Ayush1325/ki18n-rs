@@ -41,7 +41,6 @@
 //! ```
 use cpp::{cpp, cpp_class};
 use qmetaobject::prelude::*;
-use qmetaobject::QObjectPinned;
 
 cpp! {{
     #include <KLocalizedContext>
