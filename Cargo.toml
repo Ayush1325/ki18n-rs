@@ -6,10 +6,8 @@ links = "KF5I18n"
 
 [dependencies]
 cpp = "0.5"
-qmetaobject = { git = "https://github.com/woboq/qmetaobject-rs" }
-qttypes = { git = "https://github.com/woboq/qmetaobject-rs", features = [
-  "qtquick",
-] }
+qmetaobject = "0.2"
+qttypes = "0.2"
 
 [build-dependencies]
 cpp_build = "0.5"
