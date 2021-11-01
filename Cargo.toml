@@ -1,5 +1,7 @@
 [package]
 name = "ki18n-rs"
+description = "A crate to use KF5I18n from rust."
+author = ["Ayush Singh <ayushdevel1325@gmail.com>"]
 version = "0.1.0"
 edition = "2018"
 links = "KF5I18n"
