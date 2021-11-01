@@ -61,14 +61,16 @@ fn qt_setup(config: &mut cpp_build::Config) -> Version {
 
     config.include(&qt_include_path);
 
+    // Include qtcore
+    config.include(&format!("{}/{}", qt_include_path, "QtCore"));
+
     qt_version
 }
 
 fn ki18n_setup(config: &mut cpp_build::Config) {
     let kf5_i18n_path = "/usr/include/KF5/KI18n";
-    let qt_core = "/usr/include/qt/QtCore";
 
-    config.include(kf5_i18n_path).include(qt_core);
+    config.include(kf5_i18n_path);
 
     println!("cargo:rustc-link-lib=KF5I18n");
 }
