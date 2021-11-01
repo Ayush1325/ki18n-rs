@@ -1,0 +1,17 @@
+[package]
+name = "ki18n-rs"
+version = "0.1.0"
+edition = "2018"
+links = "KF5I18n"
+
+[dependencies]
+cpp = "0.5"
+qmetaobject = { git = "https://github.com/woboq/qmetaobject-rs" }
+qttypes = { git = "https://github.com/woboq/qmetaobject-rs", features = [
+  "qtquick",
+] }
+
+[build-dependencies]
+cpp_build = "0.5"
+semver = "1.0"
+pkg-config = "0.3"
