@@ -39,6 +39,8 @@
 //!   engine.exec();
 //! }
 //! ```
+use std::ffi::c_void;
+
 use cpp::{cpp, cpp_class};
 use qmetaobject::prelude::*;
 
@@ -67,12 +69,31 @@ impl KLocalizedContext {
     /// use ki18n_rs::KLocalizedContext;
     ///
     /// let mut engine = QmlEngine::new();
-    /// KLocalizedContext::init_from_engine(&engine);
+    /// let context = KLocalizedContext::init_from_engine(&engine);
     /// ```
-    pub fn init_from_engine(engine: &QmlEngine) {
+    pub fn init_from_engine(engine: &QmlEngine) -> Self {
         let engine_ptr = engine.cpp_ptr();
-        cpp!(unsafe [engine_ptr as "QQmlEngine*"] {
-            engine_ptr->rootContext()->setContextObject(new KLocalizedContext(engine_ptr));
-        });
+        cpp!(unsafe [engine_ptr as "QQmlEngine*"] -> KLocalizedContext as "KLocalizedContextHolder" {
+            auto klocalized = new KLocalizedContext(engine_ptr);
+            auto klocalizedholder = KLocalizedContextHolder(klocalized);
+            engine_ptr->rootContext()->setContextObject(klocalized);
+            return klocalizedholder;
+        })
+    }
+
+    /// Returns a pointer to the C++ object. The pointer is of the type `KLocalizedContext *` in C++.
+    /// ```rust
+    /// use qmetaobject::prelude::*;
+    /// use ki18n_rs::KLocalizedContext;
+    ///
+    /// let mut engine = QmlEngine::new();
+    /// let context = KLocalizedContext::init_from_engine(&engine);
+    ///
+    /// let context_ptr = context.cpp_ptr();
+    /// ```
+    pub fn cpp_ptr(&self) -> *mut c_void {
+        cpp!(unsafe [self as "KLocalizedContextHolder *"] -> *mut c_void as "KLocalizedContext *" {
+            return self->klocalized.get();
+        })
     }
 }
