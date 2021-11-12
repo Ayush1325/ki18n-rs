@@ -96,4 +96,43 @@ impl KLocalizedContext {
             return self->klocalized.get();
         })
     }
+
+    /// Set Translation Domain for current KLocalizedContext.
+    /// ```rust
+    /// use qmetaobject::prelude::*;
+    /// use ki18n_rs::KLocalizedContext;
+    ///
+    /// let mut engine = QmlEngine::new();
+    /// let mut context = KLocalizedContext::init_from_engine(&engine);
+    ///
+    /// const TRANSLATION_DOMAIN: &str = "Test Domain";
+    /// context.set_translation_domain(TRANSLATION_DOMAIN.into());
+    ///
+    /// let domain = context.translation_domain();
+    ///
+    /// assert_eq!(domain, QString::from(TRANSLATION_DOMAIN));
+    /// ```
+    pub fn set_translation_domain(&mut self, domain: QString) {
+        cpp!(unsafe [self as "KLocalizedContextHolder *", domain as "QString"] {
+            self->klocalized->setTranslationDomain(domain);
+        })
+    }
+
+    /// Retrns the current Translation Domain.
+    /// ```rust
+    /// use qmetaobject::prelude::*;
+    /// use ki18n_rs::KLocalizedContext;
+    ///
+    /// let mut engine = QmlEngine::new();
+    /// let mut context = KLocalizedContext::init_from_engine(&engine);
+    ///
+    /// let domain = context.translation_domain();
+    ///
+    /// assert_eq!(domain, QString::from(""));
+    /// ```
+    pub fn translation_domain(&self) -> QString {
+        cpp!(unsafe [self as "KLocalizedContextHolder *"] -> QString as "QString" {
+            return self->klocalized->translationDomain();
+        })
+    }
 }
