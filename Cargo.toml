@@ -2,7 +2,7 @@
 name = "ki18n-rs"
 description = "A crate to use KF5I18n from rust."
 author = ["Ayush Singh <ayushdevel1325@gmail.com>"]
-version = "1.0.1"
+version = "1.0.2"
 edition = "2018"
 links = "KF5I18n"
 license = "MIT"
@@ -17,7 +17,7 @@ qmetaobject = "0.2"
 qttypes = "0.2"
 
 [build-dependencies]
-cpp_build = "0.5"
+cpp_build = {version = "0.5 ", features = ["docs-only"]}
 semver = "1.0"
 
 [package.metadata.docs.rs]
