@@ -45,5 +45,5 @@
 //! }
 //! ```
 
-mod klocalizedcontext;
+pub mod klocalizedcontext;
 pub use klocalizedcontext::KLocalizedContext;

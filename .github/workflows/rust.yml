@@ -13,14 +13,39 @@ jobs:
   build:
     env:
       QT_QPA_PLATFORM: offscreen
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        qt: [5.15.2]
+        rust: [stable, nightly]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - name: Install Dependencie
-      run: sudo apt install build-essential extra-cmake-modules cmake qtbase5-dev qtdeclarative5-dev libqt5svg5-dev qtquickcontrols2-5-dev qml-module-org-kde-kirigami2 kirigami2-dev libkf5i18n-dev gettext libkf5coreaddons-dev qml-module-qtquick-layouts
+    - uses: actions-rs/toolchain@v1
+      with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          override: true
+          components: rustfmt, clippy
+    - uses: Swatinem/rust-cache@v1
+      with:
+        key: rust_cache
+
+    - name: Cache Qt
+      id: cache-qt
+      uses: actions/cache@v1
+      with:
+        path: ../Qt
+        key: QtCache-${{ runner.os }}-${{ matrix.qt }}
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.qt }}
+        cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+    - name: Install KF5i18n
+      run: sudo apt install libkf5i18n-dev
     - name: Build
-      run: cargo build --verbose
+      run: cargo build --verbose --all-features
     - name: Run tests
-      run: cargo test --verbose
-    - name: Generate Docs
-      run: cargo doc --verbose
+      run: cargo test --verbose --all-features
