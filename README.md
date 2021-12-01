@@ -3,6 +3,22 @@
 
 KI18n is a cross-platform internationalization framework used by KDE applications. This crate is meant to allow using KI18n with Rust and [qmetaobject-rs](https://github.com/woboq/qmetaobject-rs) crate.
 
+# Requirements
+This crate requires KF5I18n to be installed or at least present in the system.
+## Ubuntu
+``` shell
+sudo apt install libkf5i18n-dev
+```
+## Arch Linux
+``` shell
+sudo pacman -S ki18n
+```
+
+# Custom Location for KF5I18n
+The crate searches from KF5I18n using either the environment variables (KF5_I18n_INCLUDE_PATH and KF5_I18n_LIBRARY_PATH) if they are set or just
+searches at /usr/include /usr/library
+
+
 # Example
 ```rust
 use cstr::cstr;
