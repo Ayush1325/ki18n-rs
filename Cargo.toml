@@ -20,5 +20,8 @@ qttypes = "0.2"
 cpp_build = "0.5"
 semver = "1.0"
 
+[dev-dependencies]
+lazy_static = "1.4"
+
 [package.metadata.docs.rs]
 dependencies = ["qtbase5-dev", "qtdeclarative5-dev", "libqt5svg5-dev", "qtquickcontrols2-5-dev", "qml-module-org-kde-kirigami2", "kirigami2-dev", "libkf5i18n-dev", "gettext", "libkf5coreaddons-dev", "qml-module-qtquick-layouts"]
