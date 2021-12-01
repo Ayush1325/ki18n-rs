@@ -68,9 +68,24 @@ fn qt_setup(config: &mut cpp_build::Config) -> Version {
 }
 
 fn ki18n_setup(config: &mut cpp_build::Config) {
-    let kf5_i18n_path = "/usr/include/KF5/KI18n";
+    println!("cargo:rerun-if-env-changed=KF5_I18n_INCLUDE_PATH");
+    println!("cargo:rerun-if-env-changed=KF5_I18n_LIBRARY_PATH");
 
-    config.include(kf5_i18n_path);
+    let (kf5i18n_include_path, kf5i18n_library_path) = match (
+        std::env::var("KF5_I18n_INCLUDE_PATH").ok(),
+        std::env::var("KF5_I18n_LIBRARY_PATH").ok(),
+    ) {
+        (Some(include_path), Some(library_path)) => (include_path, library_path),
+        (None, None) => {
+            const DEFAULT_INCLUDE_PATH: &str = "/usr/include/KF5/KI18n";
+            (DEFAULT_INCLUDE_PATH.to_string(), "KF5I18n".to_string())
+        }
+        (Some(_), None) | (None, Some(_)) => {
+            panic!("KF5_KI18n_INCLUDE_PATH and KF5_KI18n_LIBRARY_PATH env variable must be either both empty or both set.")
+        }
+    };
 
-    println!("cargo:rustc-link-lib=KF5I18n");
+    config.include(kf5i18n_include_path);
+
+    println!("cargo:rustc-link-lib={}", kf5i18n_library_path);
 }
