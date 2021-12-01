@@ -39,29 +39,9 @@
 //!   engine.exec();
 //! }
 //! ```
+use cpp::{cpp, cpp_class};
 use qmetaobject::prelude::*;
 use std::ffi::c_void;
-
-#[cfg(not(no_qt))]
-use cpp::{cpp, cpp_class};
-
-#[cfg(no_qt)]
-mod no_qt {
-    pub fn panic<T>() -> T {
-        panic!("This example is not supported on Qt 6 and above")
-    }
-}
-
-#[cfg(no_qt)]
-macro_rules! cpp {
-    {{ $($t:tt)* }} => {};
-    {$(unsafe)? [$($a:tt)*] -> $ret:ty as $b:tt { $($t:tt)* } } => {
-        crate::no_qt::panic::<$ret>()
-    };
-    { $($t:tt)* } => {
-        crate::no_qt::panic::<()>()
-    };
-}
 
 cpp! {{
     #include <KLocalizedContext>
