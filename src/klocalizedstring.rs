@@ -16,6 +16,14 @@ cpp_class!(
 
 impl KLocalizedString {
     /// Set Application Domain
+    /// # Example
+    /// ```
+    /// use std::ffi::CString;
+    /// use ki18n_rs::prelude::KLocalizedString;
+    ///
+    /// let domain = CString::new("Application_Domain").unwrap();
+    /// KLocalizedString::set_application_domain(&domain);
+    /// ```
     pub fn set_application_domain(domain: &CStr) {
         let domain_ptr = domain.as_ptr();
         cpp!(unsafe [domain_ptr as "char*"] {

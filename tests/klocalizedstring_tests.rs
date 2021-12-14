@@ -8,7 +8,6 @@ fn application_domain() {
 
     KLocalizedString::set_application_domain(&domain);
     let domain = KLocalizedString::application_domain();
-    println!("{:#?}", domain);
 
     assert_eq!(domain.to_str().unwrap(), "KI18n");
 }

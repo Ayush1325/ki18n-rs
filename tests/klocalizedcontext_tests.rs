@@ -3,14 +3,6 @@ use qmetaobject::prelude::*;
 mod common;
 
 #[test]
-fn init_engine() {
-    let _lock = common::lock_for_test();
-
-    let engine = QmlEngine::new();
-    KLocalizedContext::init_from_engine(&engine);
-}
-
-#[test]
 fn cpp_ptr() {
     let _lock = common::lock_for_test();
 

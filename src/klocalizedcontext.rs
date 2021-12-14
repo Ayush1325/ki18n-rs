@@ -22,6 +22,14 @@ cpp_class!(
 
 impl KLocalizedContext {
     /// Initialize KLocalizedContext from Engine.
+    /// #Example
+    /// ```
+    /// use ki18n_rs::klocalizedcontext::KLocalizedContext;
+    /// use qmetaobject::prelude::*;
+    ///
+    /// let engine = QmlEngine::new();
+    /// KLocalizedContext::init_from_engine(&engine);
+    /// ```
     pub fn init_from_engine(engine: &QmlEngine) -> Self {
         let engine_ptr = engine.cpp_ptr();
         cpp!(unsafe [engine_ptr as "QQmlEngine*"] -> KLocalizedContext as "KLocalizedContextHolder" {
@@ -40,6 +48,15 @@ impl KLocalizedContext {
     }
 
     /// Set Translation Domain for current KLocalizedContext.
+    /// # Example
+    /// ```
+    /// use ki18n_rs::klocalizedcontext::KLocalizedContext;
+    /// use qmetaobject::prelude::*;
+    ///
+    /// let engine = QmlEngine::new();
+    /// let mut context = KLocalizedContext::init_from_engine(&engine);
+    /// context.set_translation_domain("Test Domain".into());
+    /// ```
     pub fn set_translation_domain(&mut self, domain: QString) {
         cpp!(unsafe [self as "KLocalizedContextHolder *", domain as "QString"] {
             self->klocalized->setTranslationDomain(domain);
