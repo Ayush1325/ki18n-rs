@@ -10,7 +10,7 @@
 //! ```ignore
 //! use cstr::cstr;
 //! use qmetaobject::prelude::*;
-//! use ki18n_rs::KLocalizedContext;
+//! use ki18n::KLocalizedContext;
 //!
 //! fn main() {
 //!   let mut engine = QmlEngine::new();

@@ -1,6 +1,6 @@
 # KI18n Crate for Rust
-[![Crates.io](https://img.shields.io/crates/v/ki18n-rs)](https://crates.io/crates/ki18n-rs)
-[![Documentation](https://docs.rs/ki18n-rs/badge.svg)](https://docs.rs/ki18n-rs/)
+[![Crates.io](https://img.shields.io/crates/v/ki18n)](https://crates.io/crates/ki18n)
+[![Documentation](https://docs.rs/ki18n/badge.svg)](https://docs.rs/ki18n/)
 
 KI18n is a cross-platform internationalization framework used by KDE applications. This crate is meant to allow using KI18n with Rust and [qmetaobject-rs](https://github.com/woboq/qmetaobject-rs) crate.
 
@@ -29,7 +29,7 @@ searches at /usr/include /usr/library
 ```rust
 use cstr::cstr;
 use qmetaobject::prelude::*;
-use ki18n_rs::KLocalizedContext;
+use ki18n::KLocalizedContext;
 
 fn main() {
   let mut engine = QmlEngine::new();
