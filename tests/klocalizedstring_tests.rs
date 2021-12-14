@@ -1,4 +1,4 @@
-use ki18n_rs::klocalizedstring::KLocalizedString;
+use ki18n::klocalizedstring::KLocalizedString;
 use std::ffi::CString;
 
 #[test]

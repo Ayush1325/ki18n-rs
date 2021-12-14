@@ -24,7 +24,7 @@ impl KLocalizedContext {
     /// Initialize KLocalizedContext from Engine.
     /// #Example
     /// ```
-    /// use ki18n_rs::klocalizedcontext::KLocalizedContext;
+    /// use ki18n::klocalizedcontext::KLocalizedContext;
     /// use qmetaobject::prelude::*;
     ///
     /// let engine = QmlEngine::new();
@@ -50,7 +50,7 @@ impl KLocalizedContext {
     /// Set Translation Domain for current KLocalizedContext.
     /// # Example
     /// ```
-    /// use ki18n_rs::klocalizedcontext::KLocalizedContext;
+    /// use ki18n::klocalizedcontext::KLocalizedContext;
     /// use qmetaobject::prelude::*;
     ///
     /// let engine = QmlEngine::new();

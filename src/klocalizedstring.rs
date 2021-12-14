@@ -1,5 +1,5 @@
 use cpp::{cpp, cpp_class};
-use qmetaobject::QByteArray;
+use qmetaobject::{QByteArray, QString, QStringList};
 use std::ffi::CStr;
 
 cpp! {{
@@ -19,7 +19,7 @@ impl KLocalizedString {
     /// # Example
     /// ```
     /// use std::ffi::CString;
-    /// use ki18n_rs::prelude::KLocalizedString;
+    /// use ki18n::prelude::KLocalizedString;
     ///
     /// let domain = CString::new("Application_Domain").unwrap();
     /// KLocalizedString::set_application_domain(&domain);
