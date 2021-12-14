@@ -1,4 +1,4 @@
-use ki18n_rs::KLocalizedContext;
+use ki18n_rs::klocalizedcontext::KLocalizedContext;
 use qmetaobject::prelude::*;
 mod common;
 
