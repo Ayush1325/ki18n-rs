@@ -73,9 +73,24 @@ impl KLocalizedString {
     }
 
     /// Check whether the translation catalog file in the given language for the set application translation domain exists.
-    pub fn is_application_translated_into(language: &QString) -> bool {
+    pub fn is_application_translated_into(language: QString) -> bool {
         cpp!(unsafe [language as "QString"] -> bool as "bool" {
             return KLocalizedString::isApplicationTranslatedInto(language);
+        })
+    }
+
+    /// Find a path to the localized file for the given original path.
+    /// This is intended mainly for non-text resources (images, sounds, etc). Text resources should be handled in more specific ways.
+    pub fn localized_file_path(file_path: QString) -> QString {
+        cpp!(unsafe [file_path as "QString"] -> QString as "QString" {
+            return KLocalizedString::localizedFilePath(file_path);
+        })
+    }
+
+    /// Remove accelerator marker from a UI text label.
+    pub fn remove_accelerator_marker(label: QString) -> QString{
+        cpp!(unsafe [label as "QString"] -> QString as "QString" {
+            return KLocalizedString::removeAcceleratorMarker(label);
         })
     }
 }
