@@ -11,3 +11,6 @@ fn application_domain() {
 
     assert_eq!(domain.to_str().unwrap(), "KI18n");
 }
+
+#[test]
+fn languages() {}

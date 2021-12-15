@@ -37,4 +37,45 @@ impl KLocalizedString {
             return KLocalizedString::applicationDomain();
         })
     }
+
+    /// Get the languages for which translations will be made.
+    /// Returned languages are ordered with decreasing priority.
+    pub fn languages() -> QStringList {
+        cpp!(unsafe [] -> QStringList as "QStringList" {
+            return KLocalizedString::languages();
+        })
+    }
+
+    /// Set the languages for which translations will be made.
+    /// This overrides the languages provided by the locale. Languages should be ordered with decreasing priority.
+    /// TODO: Add Test
+    pub fn set_languages(languages: &QStringList) {
+        cpp!(unsafe [languages as "QStringList"] {
+            KLocalizedString::setLanguages(languages);
+        });
+    }
+
+    /// Clear override languages.
+    /// This clears the override languages, going back to those provided by the locale.
+    /// TODO: Add Test.
+    pub fn clear_languages() {
+        cpp!(unsafe [] {
+            KLocalizedString::clearLanguages();
+        })
+    }
+
+    /// Load locales for a domain from a specific location.
+    /// This is useful for resources which have their translation files outside of the usual $XDG_DATA_DIRS/locales location.
+    pub fn add_domain_locale_dir(domain: QByteArray, path: QString) {
+        cpp!(unsafe [domain as "QByteArray", path as "QString"] {
+            KLocalizedString::addDomainLocaleDir(domain, path);
+        })
+    }
+
+    /// Check whether the translation catalog file in the given language for the set application translation domain exists.
+    pub fn is_application_translated_into(language: &QString) -> bool {
+        cpp!(unsafe [language as "QString"] -> bool as "bool" {
+            return KLocalizedString::isApplicationTranslatedInto(language);
+        })
+    }
 }
