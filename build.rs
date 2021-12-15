@@ -17,6 +17,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 use semver::Version;
+use std::path::PathBuf;
 
 fn main() {
     eprintln!("cargo:warning={:?}", std::env::vars().collect::<Vec<_>>());
@@ -68,24 +69,42 @@ fn qt_setup(config: &mut cpp_build::Config) -> Version {
 }
 
 fn ki18n_setup(config: &mut cpp_build::Config) {
-    println!("cargo:rerun-if-env-changed=KF5_I18n_INCLUDE_PATH");
-    println!("cargo:rerun-if-env-changed=KF5_I18n_LIBRARY_PATH");
+    let (kf5_include_path, kf5_library_path) = probe_kf5();
 
-    let (kf5i18n_include_path, kf5i18n_library_path) = match (
-        std::env::var("KF5_I18n_INCLUDE_PATH").ok(),
-        std::env::var("KF5_I18n_LIBRARY_PATH").ok(),
+    config
+        .include(kf5_include_path.join("KI18n"))
+        .include(kf5_include_path.join("KI18nLocaleData"));
+
+    println!(
+        "cargo:rustc-link-search={}",
+        kf5_library_path.to_str().unwrap()
+    );
+
+    println!("cargo:rustc-link-lib={}", "KF5I18n");
+    println!("cargo:rustc-link-lib={}", "KF5I18nLocaleData");
+}
+
+fn probe_kf5() -> (PathBuf, PathBuf) {
+    println!("cargo:rerun-if-env-changed=KF5_INCLUDE_PATH");
+    println!("cargo:rerun-if-env-changed=KF5_LIBRARY_PATH");
+
+    match (
+        std::env::var("KF5_INCLUDE_PATH").ok(),
+        std::env::var("KF5_LIBRARY_PATH").ok(),
     ) {
-        (Some(include_path), Some(library_path)) => (include_path, library_path),
+        (Some(include_path), Some(library_path)) => {
+            (PathBuf::from(include_path), PathBuf::from(library_path))
+        }
         (None, None) => {
-            const DEFAULT_INCLUDE_PATH: &str = "/usr/include/KF5/KI18n";
-            (DEFAULT_INCLUDE_PATH.to_string(), "KF5I18n".to_string())
+            const DEFAULT_INCLUDE_PATH: &str = "/usr/include/KF5";
+            const DEFAULT_LIBRARY_PATH: &str = "/usr/lib";
+            (
+                PathBuf::from(DEFAULT_INCLUDE_PATH),
+                PathBuf::from(DEFAULT_LIBRARY_PATH),
+            )
         }
         (Some(_), None) | (None, Some(_)) => {
             panic!("KF5_KI18n_INCLUDE_PATH and KF5_KI18n_LIBRARY_PATH env variable must be either both empty or both set.")
         }
-    };
-
-    config.include(kf5i18n_include_path);
-
-    println!("cargo:rustc-link-lib={}", kf5i18n_library_path);
+    }
 }
