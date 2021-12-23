@@ -44,7 +44,7 @@ jobs:
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
     - name: Install KF5i18n
-      run: sudo apt install libkf5i18n-dev libkf5i18nlocaledata5
+      run: sudo apt install libkf5i18n-dev
     - name: Build
       run: cargo build --verbose --all-features
     - name: Run tests

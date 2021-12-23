@@ -72,8 +72,8 @@ fn ki18n_setup(config: &mut cpp_build::Config) {
     let (kf5_include_path, kf5_library_path) = probe_kf5();
 
     config
-        .include(kf5_include_path.join("KI18n"))
-        .include(kf5_include_path.join("KI18nLocaleData"));
+        // .include(kf5_include_path.join("KI18nLocaleData"))
+        .include(kf5_include_path.join("KI18n"));
 
     println!(
         "cargo:rustc-link-search={}",
@@ -81,7 +81,7 @@ fn ki18n_setup(config: &mut cpp_build::Config) {
     );
 
     println!("cargo:rustc-link-lib={}", "KF5I18n");
-    println!("cargo:rustc-link-lib={}", "KF5I18nLocaleData");
+    // println!("cargo:rustc-link-lib={}", "KF5I18nLocaleData");
 }
 
 fn probe_kf5() -> (PathBuf, PathBuf) {
