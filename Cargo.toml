@@ -13,7 +13,7 @@ build = "build.rs"
 
 [dependencies]
 cpp = "0.5"
-qmetaobject = "0.2"
+qmetaobject = { version = "0.2", optional = true }
 qttypes = "0.2"
 # qmetaobject = { path="../qmetaobject-rs/qmetaobject" }
 # qttypes = { path="../qmetaobject-rs/qttypes" }
@@ -26,4 +26,8 @@ semver = "1.0"
 lazy_static = "1.4"
 
 [package.metadata.docs.rs]
-dependencies = ["qtbase5-dev", "qtdeclarative5-dev", "libqt5svg5-dev", "qtquickcontrols2-5-dev", "qml-module-org-kde-kirigami2", "kirigami2-dev", "libkf5i18n-dev", "gettext", "libkf5coreaddons-dev", "qml-module-qtquick-layouts"]
+dependencies = ["qtbase5-dev", "qtdeclarative5-dev", "libkf5i18n-dev"]
+all-features = true
+
+[features]
+all = ["qmetaobject"]

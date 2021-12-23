@@ -1,6 +1,9 @@
 use cpp::{cpp, cpp_class};
-use qmetaobject::prelude::*;
+use qttypes::QString;
 use std::ffi::c_void;
+
+#[cfg(feature = "qmetaobject")]
+use qmetaobject::QmlEngine;
 
 cpp! {{
     #include <KLocalizedContext>
@@ -21,11 +24,13 @@ cpp_class!(
 );
 
 impl KLocalizedContext {
+    #[cfg(feature = "qmetaobject")]
     /// Initialize KLocalizedContext from Engine.
-    /// #Example
+    /// **Feature** `qmetaobject` needs to be enabled for this function.
+    /// # Example
     /// ```
     /// use ki18n::klocalizedcontext::KLocalizedContext;
-    /// use qmetaobject::prelude::*;
+    /// use qmetaobject::QmlEngine;
     ///
     /// let engine = QmlEngine::new();
     /// KLocalizedContext::init_from_engine(&engine);
@@ -48,22 +53,28 @@ impl KLocalizedContext {
     }
 
     /// Set Translation Domain for current KLocalizedContext.
-    /// # Example
-    /// ```
-    /// use ki18n::klocalizedcontext::KLocalizedContext;
-    /// use qmetaobject::prelude::*;
-    ///
-    /// let engine = QmlEngine::new();
-    /// let mut context = KLocalizedContext::init_from_engine(&engine);
-    /// context.set_translation_domain("Test Domain".into());
-    /// ```
+    #[cfg_attr(
+        feature = "qmetaobject",
+        doc = r##"
+# Example
+
+```
+use ki18n::klocalizedcontext::KLocalizedContext;
+use qmetaobject::QmlEngine;
+
+let engine = QmlEngine::new();
+let mut context = KLocalizedContext::init_from_engine(&engine);
+context.set_translation_domain("Test Domain".into());
+```
+"##
+    )]
     pub fn set_translation_domain(&mut self, domain: QString) {
         cpp!(unsafe [self as "KLocalizedContextHolder *", domain as "QString"] {
             self->klocalized->setTranslationDomain(domain);
         })
     }
 
-    /// Retrns the current Translation Domain.
+    /// Returns the current Translation Domain.
     pub fn translation_domain(&self) -> QString {
         cpp!(unsafe [self as "KLocalizedContextHolder *"] -> QString as "QString" {
             return self->klocalized->translationDomain();

@@ -1,8 +1,13 @@
 use ki18n::klocalizedcontext::KLocalizedContext;
-use qmetaobject::prelude::*;
+use qttypes::QString;
+
+#[cfg(feature = "qmetaobject")]
+use qmetaobject::QmlEngine;
+
 mod common;
 
 #[test]
+#[cfg(feature = "qmetaobject")]
 fn cpp_ptr() {
     let _lock = common::lock_for_test();
 
@@ -14,6 +19,7 @@ fn cpp_ptr() {
 }
 
 #[test]
+#[cfg(feature = "qmetaobject")]
 fn translation_domain() {
     let _lock = common::lock_for_test();
 

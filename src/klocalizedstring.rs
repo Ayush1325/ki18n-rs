@@ -1,5 +1,5 @@
 use cpp::{cpp, cpp_class};
-use qmetaobject::{QByteArray, QString, QStringList};
+use qttypes::{QByteArray, QString, QStringList};
 use std::ffi::CStr;
 
 cpp! {{
@@ -116,7 +116,7 @@ impl KLocalizedString {
     /// TODO: Add Test
     pub fn with_languages(&self, languages: &QStringList) -> KLocalizedString {
         cpp!(unsafe [self as "KLocalizedString *", languages as "QStringList"] -> KLocalizedString as "KLocalizedString" {
-            return self->withLangauages(languages);
+            return self->withLanguages(languages);
         })
     }
 }
