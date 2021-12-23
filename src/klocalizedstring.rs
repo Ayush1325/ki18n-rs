@@ -11,6 +11,7 @@ cpp_class!(
     /// Wrapper around [`KLocalizedString`][class] class
     ///
     /// [class]: https://api.kde.org/frameworks/ki18n/html/classKLocalizedString.html
+    #[derive(Default, Clone)]
     pub unsafe struct KLocalizedString as "KLocalizedString"
 );
 
@@ -88,9 +89,34 @@ impl KLocalizedString {
     }
 
     /// Remove accelerator marker from a UI text label.
-    pub fn remove_accelerator_marker(label: QString) -> QString{
+    pub fn remove_accelerator_marker(label: QString) -> QString {
         cpp!(unsafe [label as "QString"] -> QString as "QString" {
             return KLocalizedString::removeAcceleratorMarker(label);
+        })
+    }
+
+    /// Finalize the translation.
+    /// Creates translated QString, with placeholders substituted by arguments given by KLocalizedString::subs methods.
+    pub fn to_qstring(&self) -> QString {
+        cpp!(unsafe [self as "KLocalizedString *"] -> QString as "QString" {
+            return self->toString();
+        })
+    }
+
+    /// Indicate to look for translation in the given domain.
+    /// TODO: Add Test
+    pub fn with_domain(&self, domain: &CStr) -> KLocalizedString {
+        let domain_ptr = domain.as_ptr();
+        cpp!(unsafe [self as "KLocalizedString *", domain_ptr as "char*"] -> KLocalizedString as "KLocalizedString" {
+            return self->withDomain(domain_ptr);
+        })
+    }
+
+    /// Indicate to look for translation only in given languages.
+    /// TODO: Add Test
+    pub fn with_languages(&self, languages: &QStringList) -> KLocalizedString {
+        cpp!(unsafe [self as "KLocalizedString *", languages as "QStringList"] -> KLocalizedString as "KLocalizedString" {
+            return self->withLangauages(languages);
         })
     }
 }
