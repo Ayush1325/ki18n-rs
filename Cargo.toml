@@ -9,7 +9,7 @@ license = "MIT"
 readme = "README.md"
 repository = "https://github.com/Ayush1325/ki18n-rs"
 keywords = ["KDE", "kde", "localization"]
-categories = ["api-bindings", "KDE"]
+categories = ["api-bindings", "external-ffi-bindings", "localization"]
 build = "build.rs"
 
 [dependencies]
