@@ -2,13 +2,14 @@
 name = "ki18n"
 description = "A crate to use KF5I18n from rust."
 author = ["Ayush Singh <ayushdevel1325@gmail.com>"]
-version = "1.0.5"
+version = "1.0.6"
 edition = "2018"
 links = "KF5I18n"
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/Ayush1325/ki18n-rs"
-keywords = ["ki18n", "kde", "localization"]
+keywords = ["KDE", "kde", "localization"]
+categories = ["api-bindings", "KDE"]
 build = "build.rs"
 
 [dependencies]
