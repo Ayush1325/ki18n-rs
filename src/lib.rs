@@ -47,6 +47,7 @@
 
 pub mod klocalizedcontext;
 pub mod klocalizedstring;
+pub mod klocalizedtranslator;
 // pub mod kcountry;
 
 pub mod prelude {
