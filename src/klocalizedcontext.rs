@@ -19,7 +19,7 @@ cpp! {{
 }}
 
 cpp_class!(
-    /// Struct representing KLocalizedContext. Mainly used with QML.
+    /// Struct representing [KLocalizedContext](https://api.kde.org/frameworks/ki18n/html/classKLocalizedContext.html). Mainly used with QML.
     pub unsafe struct KLocalizedContext as "KLocalizedContextHolder"
 );
 
