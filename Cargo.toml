@@ -2,8 +2,8 @@
 name = "ki18n"
 description = "A crate to use KF5I18n from rust."
 author = ["Ayush Singh <ayushdevel1325@gmail.com>"]
-version = "1.0.6"
-edition = "2018"
+version = "1.0.7"
+edition = "2021"
 links = "KF5I18n"
 license = "MIT"
 readme = "README.md"
