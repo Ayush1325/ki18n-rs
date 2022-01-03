@@ -17,7 +17,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 use semver::Version;
-use std::path::PathBuf;
 
 fn main() {
     eprintln!("cargo:warning={:?}", std::env::vars().collect::<Vec<_>>());
@@ -69,42 +68,9 @@ fn qt_setup(config: &mut cpp_build::Config) -> Version {
 }
 
 fn ki18n_setup(config: &mut cpp_build::Config) {
-    let (kf5_include_path, kf5_library_path) = probe_kf5();
+    const LIB_NAME: &str = "I18n";
 
-    config
-        // .include(kf5_include_path.join("KI18nLocaleData"))
-        .include(kf5_include_path.join("KI18n"));
+    config.include(kde_frameworks::get_lib_include_path(LIB_NAME).unwrap());
 
-    println!(
-        "cargo:rustc-link-search={}",
-        kf5_library_path.to_str().unwrap()
-    );
-
-    println!("cargo:rustc-link-lib={}", "KF5I18n");
-    // println!("cargo:rustc-link-lib={}", "KF5I18nLocaleData");
-}
-
-fn probe_kf5() -> (PathBuf, PathBuf) {
-    println!("cargo:rerun-if-env-changed=KF5_INCLUDE_PATH");
-    println!("cargo:rerun-if-env-changed=KF5_LIBRARY_PATH");
-
-    match (
-        std::env::var("KF5_INCLUDE_PATH").ok(),
-        std::env::var("KF5_LIBRARY_PATH").ok(),
-    ) {
-        (Some(include_path), Some(library_path)) => {
-            (PathBuf::from(include_path), PathBuf::from(library_path))
-        }
-        (None, None) => {
-            const DEFAULT_INCLUDE_PATH: &str = "/usr/include/KF5";
-            const DEFAULT_LIBRARY_PATH: &str = "/usr/lib";
-            (
-                PathBuf::from(DEFAULT_INCLUDE_PATH),
-                PathBuf::from(DEFAULT_LIBRARY_PATH),
-            )
-        }
-        (Some(_), None) | (None, Some(_)) => {
-            panic!("KF5_KI18n_INCLUDE_PATH and KF5_KI18n_LIBRARY_PATH env variable must be either both empty or both set.")
-        }
-    }
+    kde_frameworks::link_lib(LIB_NAME).unwrap();
 }

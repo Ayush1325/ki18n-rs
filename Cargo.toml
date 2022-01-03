@@ -16,12 +16,11 @@ build = "build.rs"
 cpp = "0.5"
 qmetaobject = { version = "0.2", optional = true }
 qttypes = "0.2"
-# qmetaobject = { path="../qmetaobject-rs/qmetaobject" }
-# qttypes = { path="../qmetaobject-rs/qttypes" }
 
 [build-dependencies]
 cpp_build = "0.5"
 semver = "1.0"
+kde_frameworks = "0.1"
 
 [dev-dependencies]
 lazy_static = "1.4"
