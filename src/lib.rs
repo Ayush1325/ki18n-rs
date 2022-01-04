@@ -28,10 +28,10 @@
 //!
 //!
 //! # Example
-//! ```rust
+//! ```no_run
 //! use cstr::cstr;
 //! use qmetaobject::prelude::*;
-//! use ki18n::KLocalizedContext;
+//! use ki18n::klocalizedcontext::KLocalizedContext;
 //!
 //! fn main() {
 //!   let mut engine = QmlEngine::new();

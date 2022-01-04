@@ -24,6 +24,7 @@ kde_frameworks = "0.1"
 
 [dev-dependencies]
 lazy_static = "1.4"
+cstr = "0.2"
 
 [package.metadata.docs.rs]
 dependencies = ["qtbase5-dev", "qtdeclarative5-dev", "libkf5i18n-dev"]

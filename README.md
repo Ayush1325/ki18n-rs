@@ -35,7 +35,7 @@ The crate searches from KF5I18n using either the environment variables (`KF_VERS
 ```rust
 use cstr::cstr;
 use qmetaobject::prelude::*;
-use ki18n::KLocalizedContext;
+use ki18n::klocalizedcontext::KLocalizedContext;
 
 fn main() {
   let mut engine = QmlEngine::new();
