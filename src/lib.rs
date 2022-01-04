@@ -1,13 +1,34 @@
-//! # KI18n-rs
-//! KI18n is a cross-platform internationalization framework used by KDE applications. This crate is meant to allow using KI18n with
-//! Rust and [qmetaobject-rs](https://github.com/woboq/qmetaobject-rs) crate.
+//! # Introduction
+//! KI18n is a cross-platform internationalization framework used by KDE applications. This crate
+//! is meant to allow using KI18n with Rust and [qmetaobject-rs](https://github.com/woboq/qmetaobject-rs) crate.
+//!
+//! # Motivation
+//! I love KDE. I have been using it as my primary DE for quite a while. I also like Rust Programming Language.
+//! Currently, it is nearly impossible to use any KDE frameworks from Rust without some C++ FFI. While FFI is
+//! never easy, complexity with C++ is exponentially more than plain C due to the Object-Oriented nature of C++,
+//! which is entirely different from Rust's somewhat functional design.
+//!
+//! If possible, I would like the Tier-1 KDE Frameworks to be usable from pragmatic Rust in a somewhat natural
+//! fashion. I am currently interested in KDE frameworks that are usable with QML.
+//!
+//! # Requirements
+//! This crate requires KF5I18n to be installed or at least present in the system.
+//! ## Ubuntu
+//! ``` shell
+//! sudo apt install libkf5i18n-dev
+//! ```
+//! ## Arch Linux
+//! ``` shell
+//! sudo pacman -S ki18n
+//! ```
 //!
 //! # Custom Location for KF5I18n
-//! The crate searches from KF5I18n using either the environment variables (KF5_I18n_INCLUDE_PATH and KF5_I18n_LIBRARY_PATH) if they are set or just
-//! searches at /usr/include /usr/library
+//! The crate searches from KF5I18n using either the environment variables (`KF_VERSION`,
+//! `KF_INCLUDE_PATH` and `KF_LIBRARY_PATH`) if they are set or uses `kf5-config` to find the paths.
+//!
 //!
 //! # Example
-//! ```ignore
+//! ```rust
 //! use cstr::cstr;
 //! use qmetaobject::prelude::*;
 //! use ki18n::KLocalizedContext;
