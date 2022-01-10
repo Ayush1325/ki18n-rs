@@ -26,6 +26,8 @@
 //! The crate searches from KF5I18n using either the environment variables (`KF_VERSION`,
 //! `KF_INCLUDE_PATH` and `KF_LIBRARY_PATH`) if they are set or uses `kf5-config` to find the paths.
 //!
+//! # Features
+//! - `qmetaobject` : Enables some methods that require qmetaobject. Most people will need this.
 //!
 //! # Example
 //! ```no_run
