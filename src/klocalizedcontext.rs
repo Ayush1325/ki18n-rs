@@ -38,9 +38,8 @@ impl KLocalizedContext {
     pub fn init_from_engine(engine: &QmlEngine) -> Self {
         let engine_ptr = engine.cpp_ptr();
         cpp!(unsafe [engine_ptr as "QQmlEngine*"] -> KLocalizedContext as "KLocalizedContextHolder" {
-            auto klocalized = new KLocalizedContext(engine_ptr);
-            auto klocalizedholder = KLocalizedContextHolder(klocalized);
-            engine_ptr->rootContext()->setContextObject(klocalized);
+            auto klocalizedholder = KLocalizedContextHolder(engine_ptr);
+            engine_ptr->rootContext()->setContextObject(klocalizedholder.klocalized.get());
             return klocalizedholder;
         })
     }
