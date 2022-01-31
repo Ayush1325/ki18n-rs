@@ -74,5 +74,6 @@ pub mod klocalizedtranslator;
 // pub mod kcountry;
 
 pub mod prelude {
+    pub use crate::klocalizedcontext::KLocalizedContext;
     pub use crate::klocalizedstring::KLocalizedString;
 }

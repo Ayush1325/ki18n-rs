@@ -50,7 +50,7 @@ impl KLocalizedString {
     /// Set the languages for which translations will be made.
     /// This overrides the languages provided by the locale. Languages should be ordered with decreasing priority.
     /// TODO: Add Test
-    pub fn set_languages(languages: &QStringList) {
+    pub fn set_languages(languages: QStringList) {
         cpp!(unsafe [languages as "QStringList"] {
             KLocalizedString::setLanguages(languages);
         });
@@ -98,7 +98,7 @@ impl KLocalizedString {
     /// Finalize the translation.
     /// Creates translated QString, with placeholders substituted by arguments given by KLocalizedString::subs methods.
     pub fn to_qstring(&self) -> QString {
-        cpp!(unsafe [self as "KLocalizedString *"] -> QString as "QString" {
+        cpp!(unsafe [self as "const KLocalizedString *"] -> QString as "QString" {
             return self->toString();
         })
     }
@@ -107,15 +107,15 @@ impl KLocalizedString {
     /// TODO: Add Test
     pub fn with_domain(&self, domain: &CStr) -> KLocalizedString {
         let domain_ptr = domain.as_ptr();
-        cpp!(unsafe [self as "KLocalizedString *", domain_ptr as "char*"] -> KLocalizedString as "KLocalizedString" {
+        cpp!(unsafe [self as "const KLocalizedString *", domain_ptr as "char*"] -> KLocalizedString as "KLocalizedString" {
             return self->withDomain(domain_ptr);
         })
     }
 
     /// Indicate to look for translation only in given languages.
     /// TODO: Add Test
-    pub fn with_languages(&self, languages: &QStringList) -> KLocalizedString {
-        cpp!(unsafe [self as "KLocalizedString *", languages as "QStringList"] -> KLocalizedString as "KLocalizedString" {
+    pub fn with_languages(&self, languages: QStringList) -> KLocalizedString {
+        cpp!(unsafe [self as "const KLocalizedString *", languages as "QStringList"] -> KLocalizedString as "KLocalizedString" {
             return self->withLanguages(languages);
         })
     }

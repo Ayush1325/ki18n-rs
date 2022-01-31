@@ -46,7 +46,7 @@ impl KLocalizedContext {
 
     /// Returns a pointer to the C++ object. The pointer is of the type `KLocalizedContext *` in C++.
     pub fn cpp_ptr(&self) -> *mut c_void {
-        cpp!(unsafe [self as "KLocalizedContextHolder *"] -> *mut c_void as "KLocalizedContext *" {
+        cpp!(unsafe [self as "const KLocalizedContextHolder *"] -> *mut c_void as "KLocalizedContext *" {
             return self->klocalized.get();
         })
     }
@@ -75,7 +75,7 @@ context.set_translation_domain("Test Domain".into());
 
     /// Returns the current Translation Domain.
     pub fn translation_domain(&self) -> QString {
-        cpp!(unsafe [self as "KLocalizedContextHolder *"] -> QString as "QString" {
+        cpp!(unsafe [self as "const KLocalizedContextHolder *"] -> QString as "QString" {
             return self->klocalized->translationDomain();
         })
     }
