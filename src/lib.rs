@@ -14,11 +14,12 @@
 //! # Requirements
 //! This crate requires KF5I18n to be installed or at least present in the system.
 //! ## Ubuntu
-//! ``` shell
+//! ```shell
 //! sudo apt install libkf5i18n-dev
 //! ```
+//!
 //! ## Arch Linux
-//! ``` shell
+//! ```shell
 //! sudo pacman -S ki18n
 //! ```
 //!

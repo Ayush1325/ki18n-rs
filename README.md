@@ -18,11 +18,12 @@ fashion. I am currently interested in KDE frameworks that are usable with QML.
 ## Requirements
 This crate requires KF5I18n to be installed or at least present in the system.
 ### Ubuntu
-``` shell
+```shell
 sudo apt install libkf5i18n-dev
-```rust
-## Arch Linux
-``` shell
+```
+
+### Arch Linux
+```shell
 sudo pacman -S ki18n
 ```
 
@@ -34,7 +35,7 @@ The crate searches from KF5I18n using either the environment variables (`KF_VERS
 - `qmetaobject` : Enables some methods that require qmetaobject. Most people will need this.
 
 ## Example
-```rust
+```no-run
 use cstr::cstr;
 use qmetaobject::prelude::*;
 use ki18n::klocalizedcontext::KLocalizedContext;
@@ -70,4 +71,4 @@ fn main() {
   "#.into());
   engine.exec();
 }
-```
+```rust
