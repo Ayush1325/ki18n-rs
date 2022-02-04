@@ -12,7 +12,7 @@ fn cpp_ptr() {
     let _lock = common::lock_for_test();
 
     let engine = QmlEngine::new();
-    let context = KLocalizedContext::init_from_engine(&engine);
+    let context = KLocalizedContext::default();
 
     let context_ptr = context.cpp_ptr();
     assert_ne!(std::ptr::null(), context_ptr);
@@ -24,7 +24,7 @@ fn translation_domain() {
     let _lock = common::lock_for_test();
 
     let engine = QmlEngine::new();
-    let mut context = KLocalizedContext::init_from_engine(&engine);
+    let mut context = KLocalizedContext::default();
 
     const TRANSLATION_DOMAIN: &str = "Test Domain";
     context.set_translation_domain(TRANSLATION_DOMAIN.into());

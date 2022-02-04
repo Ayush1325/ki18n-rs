@@ -30,7 +30,7 @@
 //! - `qmetaobject` : Enables some methods that require qmetaobject. Most people will need this.
 //!
 //! # Example
-//! ```no_run
+//! ```no-run
 //! use cstr::cstr;
 //! use qmetaobject::prelude::*;
 //! use ki18n::klocalizedcontext::KLocalizedContext;
